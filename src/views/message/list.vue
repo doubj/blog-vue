@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-button slot="reference" type="info" class="filter-item" @click="helpDialog=!helpDialog">帮助</el-button>
+      <el-button slot="reference" type="info" class="filter-button" @click="helpDialog=!helpDialog">帮助</el-button>
       <el-input
         v-model="listQuery.nickName"
         placeholder="昵称"
@@ -9,7 +9,7 @@
         class="filter-item"
         @keyup.enter.native="handleFilter"
       />
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+      <el-button class="filter-button" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
       <div>
         <el-radio v-model="listQuery.type" label="message" @change="handleFilter">留言</el-radio>
         <el-radio v-model="listQuery.type" label="article" @change="handleFilter">文章评论</el-radio>

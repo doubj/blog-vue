@@ -9,8 +9,8 @@
         class="filter-item"
         @keyup.enter.native="handleFilter"
       />
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleAdd">添加</el-button>
-      <el-button class="filter-item" type="danger" icon="el-icon-search" @click="handleDelte">删除</el-button>
+      <el-button class="filter-button" type="primary" icon="el-icon-search" @click="handleAdd">添加</el-button>
+      <el-button class="filter-button" type="danger" icon="el-icon-search" @click="handleDelte">删除</el-button>
     </div>
     <div class="cloud">
       <router-link

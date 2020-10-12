@@ -2,7 +2,7 @@
   <div class="app-container">
     <Warning />
     <div class="filter-container">
-      <el-button class="filter-item" style="float:right" type="primary" @click="dialogVisible=!dialogVisible">
+      <el-button class="filter-button" style="float:right" type="primary" @click="dialogVisible=!dialogVisible">
         添加
       </el-button>
     </div>

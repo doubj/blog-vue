@@ -1,8 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <Search @handleFilter="handleFilter" @handleClear="handleClear" />
-    </div>
+    <Search @handleFilter="handleFilter" @handleClear="handleClear" />
     <el-table v-loading="loading" :data="list" style="width: 100%;">
       <el-table-column type="expand">
         <template slot-scope="props">

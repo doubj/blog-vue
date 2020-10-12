@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="filter-container">
     <el-input v-model="description" placeholder="描述" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-    <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+    <el-button class="filter-button" type="primary" icon="el-icon-search" @click="handleFilter">
       搜索
     </el-button>
-    <el-button style="float:right" class="filter-item" type="danger" icon="el-icon-delete" @click="clickClear">
+    <el-button style="float:right" class="filter-button" type="danger" icon="el-icon-delete" @click="clickClear">
       清空
     </el-button>
   </div>

@@ -1,11 +1,10 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-button slot="reference" type="info" class="filter-item" @click="helpDialog=!helpDialog">帮助</el-button>
+      <el-button slot="reference" type="info" class="filter-button" @click="helpDialog=!helpDialog">帮助</el-button>
       <el-input
         v-model="listQuery.title"
         placeholder="标题"
-        style="width: 200px;"
         class="filter-item"
         @keyup.enter.native="handleFilter"
       />
@@ -14,7 +13,6 @@
         placeholder="分类"
         clearable
         class="filter-item"
-        style="width: 130px"
       >
         <el-option
           v-for="item in categoryOptions"
@@ -25,7 +23,6 @@
       </el-select>
       <el-select
         v-model="listQuery.sort"
-        style="width: 140px"
         class="filter-item"
         @change="handleFilter"
       >
@@ -36,10 +33,10 @@
           :value="item.key"
         />
       </el-select>
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+      <el-button class="filter-button" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
       <router-link :to="'/blog/create'">
         <el-button
-          class="filter-item"
+          class="filter-button"
           style="margin-left: 10px;"
           type="primary"
           icon="el-icon-edit"
@@ -47,13 +44,13 @@
       </router-link>
       <el-checkbox
         v-model="showBackImage"
-        class="filter-item"
+        class="filter-button"
         style="margin-left:15px;"
         @change="tableKey=tableKey+1"
       >显示图片</el-checkbox>
       <el-checkbox
         v-model="listQuery.deleted"
-        class="filter-item"
+        class="filter-button"
         style="margin-left:15px;"
         @change="handleFilter"
       >回收站</el-checkbox>
@@ -205,8 +202,8 @@ export default {
       },
       categoryOptions: [],
       sortOptions: [
-        { label: "ID Ascending", key: "+id" },
-        { label: "ID Descending", key: "-id" }
+        { label: "升序排列", key: "+id" },
+        { label: "降序排列", key: "-id" }
       ],
       helpDialog: false
     };
