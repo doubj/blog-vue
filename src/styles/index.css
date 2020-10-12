@@ -68,10 +68,15 @@ aside {
     padding-bottom: 10px;
 }
 
-.filter-container .filter-item {
+.filter-container .filter-item,.filter-container .filter-button {
     display: inline-block;
     vertical-align: middle;
     margin-bottom: 10px;
+    width: 195px;
+    margin-left: 10px;
+}
+.filter-container .filter-button {
+    width: 95px;
 }
 
 .icon {
