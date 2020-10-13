@@ -1,7 +1,7 @@
 <template>
-  <div class="app-container">
+  <div class="app-container full-height">
     <Search @handleFilter="handleFilter" @handleClear="handleClear" />
-    <el-table v-loading="loading" :data="list" style="width: 100%;">
+    <el-table v-loading="loading" :data="list" height="100%" style="width: 100%;">
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">

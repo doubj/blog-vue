@@ -1,7 +1,13 @@
 <template>
-  <div class="app-container">
+  <div class="app-container full-height">
     <div class="filter-container">
-      <el-button slot="reference" type="info" class="filter-button" @click="helpDialog=!helpDialog">帮助</el-button>
+      <el-button
+        slot="reference"
+        type="info"
+        class="filter-button"
+        @click="helpDialog = !helpDialog"
+        >帮助</el-button
+      >
       <el-input
         v-model="listQuery.title"
         placeholder="标题"
@@ -33,36 +39,45 @@
           :value="item.key"
         />
       </el-select>
-      <el-button class="filter-button" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+      <el-button
+        class="filter-button"
+        type="primary"
+        icon="el-icon-search"
+        @click="handleFilter"
+        >搜索</el-button
+      >
       <router-link :to="'/blog/create'">
         <el-button
           class="filter-button"
           style="margin-left: 10px;"
           type="primary"
           icon="el-icon-edit"
-        >添加</el-button>
+          >添加</el-button
+        >
       </router-link>
       <el-checkbox
         v-model="showBackImage"
         class="filter-button"
         style="margin-left:15px;"
-        @change="tableKey=tableKey+1"
-      >显示图片</el-checkbox>
+        @change="tableKey = tableKey + 1"
+        >显示图片</el-checkbox
+      >
       <el-checkbox
         v-model="listQuery.deleted"
         class="filter-button"
         style="margin-left:15px;"
         @change="handleFilter"
-      >回收站</el-checkbox>
+        >回收站</el-checkbox
+      >
     </div>
     <el-table
       :key="tableKey"
       v-loading="listLoading"
       :data="list"
       border
-      fit
+      height="100%"
       highlight-current-row
-      style="width: 100%;"
+      style="width: 100%"
       @sort-change="sortChange"
     >
       <el-table-column
@@ -73,73 +88,107 @@
         width="80"
         :class-name="getSortClass('id')"
       >
-        <template slot-scope="{row}">
+        <template slot-scope="{ row }">
           <span>{{ row.blogId }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" width="150px" align="center">
-        <template slot-scope="{row}">
+      <el-table-column label="创建时间" width="100" align="center">
+        <template slot-scope="{ row }">
           <span>{{ row.createTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="标题" min-width="150px">
-        <template slot-scope="{row}">
-          <router-link :to="'/blog/edit/'+row.blogId">
-            <span class="link-type" @click="handleUpdate(row)">{{ row.blogTitle }}</span>
+      <el-table-column label="标题">
+        <template slot-scope="{ row }">
+          <router-link :to="'/blog/edit/' + row.blogId">
+            <span class="link-type" @click="handleUpdate(row)">{{
+              row.blogTitle
+            }}</span>
           </router-link>
         </template>
       </el-table-column>
-      <el-table-column label="分类" width="110px" align="center">
-        <template slot-scope="{row}">
+      <el-table-column label="分类" width="100" align="center">
+        <template slot-scope="{ row }">
           <span>{{ row.blogCategoryName }}</span>
         </template>
       </el-table-column>
-      <el-table-column v-if="showBackImage" label="背景图片" width="110px" align="center">
-        <template slot-scope="{row}">
+      <el-table-column
+        v-if="showBackImage"
+        width="100"
+        label="背景图片"
+        align="center"
+      >
+        <template slot-scope="{ row }">
           <el-popover placement="right" title trigger="hover">
-            <el-image slot="reference" :src="row.blogCoverImage+'?imageView2/1/w/20/h/20'" />
-            <el-image :src="row.blogCoverImage" style="max-height: 200px;max-width: 200px" />
+            <el-image
+              slot="reference"
+              :src="row.blogCoverImage + '?imageView2/1/w/20/h/20'"
+            />
+            <el-image
+              :src="row.blogCoverImage"
+              style="max-height: 200px;max-width: 200px"
+            />
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="访问量" align="center" width="95">
-        <template slot-scope="{row}">
+      <el-table-column label="访问量" width="100" align="center">
+        <template slot-scope="{ row }">
           <span v-if="row.blogVisits">{{ row.blogVisits }}</span>
           <span v-else>0</span>
         </template>
       </el-table-column>
-      <el-table-column label="Status" class-name="status-col" width="100">
-        <template slot-scope="{row}">
-          <el-tag :type="row.blogStatus | statusFilter">{{ row.blogStatus }}</el-tag>
+      <el-table-column label="Status" width="100" class-name="status-col">
+        <template slot-scope="{ row }">
+          <el-tag :type="row.blogStatus | statusFilter">{{
+            row.blogStatus
+          }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
-        <template slot-scope="{row,$index}">
-          <router-link v-if="row.blogStatus!='deleted'" :to="'/blog/edit/'+row.blogId">
-            <el-button type="primary" size="mini">编辑</el-button>
-          </router-link>
-          <el-button
-            v-if="row.blogStatus ==='draft'"
-            size="mini"
-            type="success"
-            @click="handleModifyStatus(row,'published',$index)"
-          >发布</el-button>
-          <el-button
-            v-if="row.blogStatus === 'published' || row.blogStatus === 'deleted'"
-            size="mini"
-            @click="handleModifyStatus(row,'draft',$index)"
-          >草稿</el-button>
-          <el-button
-            v-if="row.blogStatus!='deleted'"
-            size="mini"
-            type="danger"
-            @click="handleModifyStatus(row,'deleted',$index)"
-          >删除</el-button>
+      <el-table-column
+        label="操作"
+        align="center"
+        width="350"
+        class-name="small-padding fixed-width"
+      >
+        <template slot-scope="{ row, $index }">
+          <div style="padding: 10px 0px">
+            <router-link
+              v-if="row.blogStatus != 'deleted'"
+              :to="'/blog/edit/' + row.blogId"
+            >
+              <el-button type="primary" size="mini">编辑</el-button>
+            </router-link>
+            <el-button
+              v-if="row.blogStatus === 'draft'"
+              size="mini"
+              type="success"
+              @click="handleModifyStatus(row, 'published', $index)"
+              >发布</el-button
+            >
+            <el-button
+              style="margin-left: 10px;"
+              v-if="
+                row.blogStatus === 'published' || row.blogStatus === 'deleted'
+              "
+              size="mini"
+              @click="handleModifyStatus(row, 'draft', $index)"
+              >草稿</el-button
+            >
+            <el-button
+              v-if="row.blogStatus != 'deleted'"
+              size="mini"
+              type="danger"
+              @click="handleModifyStatus(row, 'deleted', $index)"
+              >删除</el-button
+            >
+            <el-badge :value="12" class="item">
+              <el-button size="mini">查看评论</el-button>
+            </el-badge>
+          </div>
         </template>
       </el-table-column>
     </el-table>
     <pagination
-      v-show="total>0"
+      v-show="total > 0"
       :total="total"
       :page.sync="listQuery.page"
       :limit.sync="listQuery.limit"
@@ -180,10 +229,10 @@ export default {
       const statusMap = {
         published: "success",
         draft: "info",
-        deleted: "danger"
+        deleted: "danger",
       };
       return statusMap[status];
-    }
+    },
   },
   data() {
     return {
@@ -198,14 +247,14 @@ export default {
         title: undefined,
         blogCategoryId: undefined,
         sort: "+id",
-        deleted: false
+        deleted: false,
       },
       categoryOptions: [],
       sortOptions: [
         { label: "升序排列", key: "+id" },
-        { label: "降序排列", key: "-id" }
+        { label: "降序排列", key: "-id" },
       ],
-      helpDialog: false
+      helpDialog: false,
     };
   },
   created() {
@@ -215,7 +264,7 @@ export default {
   methods: {
     getList() {
       this.listLoading = true;
-      getListByQuery(this.listQuery).then(response => {
+      getListByQuery(this.listQuery).then((response) => {
         this.list = response.items;
         this.total = response.total;
       });
@@ -225,7 +274,7 @@ export default {
       }, 1 * 1000);
     },
     getCategoryOptions() {
-      getCategories().then(response => {
+      getCategories().then((response) => {
         this.categoryOptions = response;
       });
     },
@@ -240,7 +289,7 @@ export default {
             title: "成功",
             message: "还原成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
           this.total--;
           this.list.splice(index, 1);
@@ -249,14 +298,14 @@ export default {
             title: "成功",
             message: "删除成功！",
             type: "success",
-            duration: 2000
+            duration: 2000,
           });
           this.total--;
           this.list.splice(index, 1);
         } else {
           this.$message({
             message: "操作成功",
-            type: "success"
+            type: "success",
           });
           row.blogStatus = blogStatus;
         }
@@ -279,8 +328,8 @@ export default {
         this.listQuery.sort = "-id";
       }
       this.handleFilter();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -289,7 +338,7 @@ export default {
   color: #337ab7;
   cursor: pointer;
 }
-.link-type:hover{
+.link-type:hover {
   color: #20a0ff;
 }
 </style>

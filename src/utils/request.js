@@ -3,6 +3,8 @@ import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
+const errorMsg = '请求出错啦，请稍后再试！';
+
 const service = axios.create({
   baseURL: 'http://localhost:8088/admin', 
   timeout: 5000 
@@ -29,7 +31,7 @@ service.interceptors.response.use(
     // 没有错误data就是返回的数据，有错误则data包括code状态码，msg错误信息
     if (code !== 200) {
       Message({
-        message: msg || 'Error',
+        message: msg || errorMsg,
         type: 'error',
         duration: 5 * 1000
       })
@@ -55,7 +57,7 @@ service.interceptors.response.use(
   error => {
     console.log('err' + error) 
     Message({
-      message: error.message,
+      message: errorMsg,
       type: 'error',
       duration: 5 * 1000
     })

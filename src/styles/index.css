@@ -52,6 +52,12 @@ div:focus {
     padding: 20px;
 }
 
+.full-height {
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+}
+
 aside {
     background: #eef1f6;
     padding: 8px 24px;

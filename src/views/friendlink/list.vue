@@ -1,12 +1,12 @@
 <template>
-  <div class="app-container">
+  <div class="app-container full-height">
     <Warning />
     <div class="filter-container">
       <el-button class="filter-button" style="float:right" type="primary" @click="dialogVisible=!dialogVisible">
         添加
       </el-button>
     </div>
-    <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
+    <el-table v-loading="listLoading" height="100%" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column align="center" label="ID" width="80">
         <template slot-scope="{row}">
           <span>{{ row.linkId }}</span>

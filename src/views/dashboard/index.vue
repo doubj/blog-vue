@@ -58,7 +58,7 @@ export default {
     getBlogCountWithMonth() {
       getArticleStatistic().then(response => {
         for (var v of response) {
-          this.lineChartData.xData.push(v.month)
+          this.lineChartData.xData.push(v.month + '月')
           this.lineChartData.yData.push(v.count)
         }
       })
