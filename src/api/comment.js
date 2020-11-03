@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export function getComments(query) {
+export function getComments(queryHelper) {
     return request({
-        url: '/comment/query',
+        url: `/comment/query`,
         method: 'post',
-        data:query
+        data: queryHelper
     })
 }
 

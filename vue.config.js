@@ -3,6 +3,6 @@ module.exports = {
     outputDir: 'dist',
     assetsDir: 'static',
     devServer: {
-        port: 3000
+        port: 3070
     }
 }
