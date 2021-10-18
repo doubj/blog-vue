@@ -1,24 +1,10 @@
-# blog-vue
+# First Of All
 
-## Project setup
-```
-npm install
-```
+**不再更新，不再更新，不再更新**
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+基于vue-admin-template模子来开发的后台单页应用，主要就是看文档(vue-element-admin和ElementUI的文档)来实现想要的业务功能
 
-### Compiles and minifies for production
-```
-npm run build
-```
+# 效果图
 
-### Lints and fixes files
-```
-npm run lint
-```
+![](/admin.gif)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
